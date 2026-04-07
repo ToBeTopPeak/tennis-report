@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>叶伟力教练 · 学球报告</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg-d:#000;--bg-de:#161617;--bg-l:#f5f5f7;--bg-w:#fff;--t-dp:#f5f5f7;--t-ds:#86868b;--t-lp:#1d1d1f;--t-ls:#6e6e73;--blue:#2997ff;--blue-l:#06c;--green:#30d158;--orange:#ff9f0a;--red:#ff453a;--purple:#bf5af2;--pink:#ff375f;--cyan:#64d2ff;--sans:'Inter','Noto Sans SC',-apple-system,'PingFang SC',sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace;--ease:cubic-bezier(.16,1,.3,1)}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{font-family:var(--sans);color:var(--t-lp);line-height:1.47;font-size:17px;background:var(--bg-w);overflow-x:hidden}
+
+/* NAV */
+.gn{position:sticky;top:0;z-index:9999;height:44px;background:rgba(22,22,23,.82);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center}
+.gn-in{max-width:1024px;width:100%;padding:0 22px;display:flex;align-items:center;justify-content:space-between}
+.gn-b{font-size:14px;font-weight:600;color:var(--t-dp);letter-spacing:-.01em;display:flex;align-items:center;gap:6px}
+.gn-b svg{width:16px;height:16px;color:var(--green)}
+.gn-r{font-size:12px;color:var(--t-ds);font-weight:400;display:flex;gap:20px}
+
+/* SECTIONS */
+.sd{background:var(--bg-d);color:var(--t-dp)}
+.sl{background:var(--bg-l);color:var(--t-lp)}
+.sw{background:var(--bg-w);color:var(--t-lp)}
+.si{max-width:980px;margin:0 auto;padding:80px 22px;min-height:80vh;display:flex;flex-direction:column;justify-content:center}
+.si.w{max-width:1120px}
+.si.n{max-width:820px}
+.si.hp{padding:110px 22px 90px;min-height:88vh}
+.si.ah{min-height:auto}
+
+/* TYPOGRAPHY */
+.h-hero{font-size:clamp(48px,7vw,80px);font-weight:800;letter-spacing:-.04em;line-height:1.05;text-align:center}
+.h-sec{font-size:clamp(28px,3.5vw,48px);font-weight:700;letter-spacing:-.025em;line-height:1.1;text-align:center}
+.h-sub{font-size:clamp(17px,2vw,24px);font-weight:400;line-height:1.35;text-align:center;max-width:680px;margin:0 auto}
+.label{font-size:12px;text-transform:uppercase;letter-spacing:.08em;font-weight:600;text-align:center}
+
+/* HERO */
+.hero-grad{background:linear-gradient(180deg,#000 0%,#080a10 60%,#0c1018 100%)}
+.hero-title{background:linear-gradient(135deg,var(--green) 0%,var(--cyan) 50%,var(--blue) 100%);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+
+/* KPI */
+.kpi-g{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:56px;background:rgba(255,255,255,.06);border-radius:20px;overflow:hidden}
+.kpi{background:rgba(255,255,255,.03);padding:36px 16px;text-align:center;transition:background .3s;opacity:0;transform:translateY(16px)}
+.aa .kpi{opacity:1;transform:none;transition:background .3s,opacity .5s var(--ease),transform .5s var(--ease)}
+.aa .kpi:nth-child(1){transition-delay:.05s}.aa .kpi:nth-child(2){transition-delay:.1s}.aa .kpi:nth-child(3){transition-delay:.15s}.aa .kpi:nth-child(4){transition-delay:.2s}
+.kpi:hover{background:rgba(255,255,255,.06)}
+.kpi-n{font-family:var(--mono);font-size:clamp(30px,4.5vw,52px);font-weight:700;letter-spacing:-.02em;line-height:1.1}
+.kpi-l{font-size:12px;color:var(--t-ds);margin-top:6px;text-transform:uppercase;letter-spacing:.08em;font-weight:500}
+.kpi-d{display:inline-block;font-size:11px;font-family:var(--mono);font-weight:600;padding:2px 8px;border-radius:6px;margin-top:8px}
+
+/* BAR */
+.bars{display:flex;align-items:flex-end;gap:4px;height:220px;padding-top:16px}
+.bg{flex:1;display:flex;flex-direction:column;align-items:center;height:100%;justify-content:flex-end}
+.b{width:100%;max-width:48px;border-radius:6px 6px 2px 2px;transition:all .3s var(--ease);cursor:default;transform-origin:bottom;transform:scaleY(0)}
+.aa .b{animation:gu .8s var(--ease) both}
+@keyframes gu{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+.b:hover{filter:brightness(1.2);transform:scaleX(1.05)}
+.bv{font-family:var(--mono);font-size:12px;color:var(--t-ds);margin-bottom:5px;font-weight:600;opacity:0}
+.aa .bv{animation:fi .4s .8s var(--ease) both}
+.bl{font-size:11px;color:var(--t-ds);margin-top:7px;font-weight:500}
+@keyframes fi{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+/* PHASE TIMELINE */
+.phases{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:40px;border-radius:16px;overflow:hidden}
+.phase{padding:28px 20px;text-align:center;transition:all .3s var(--ease);opacity:0;transform:translateY(16px)}
+.aa .phase{opacity:1;transform:none}
+.aa .phase:nth-child(1){transition-delay:.05s}.aa .phase:nth-child(2){transition-delay:.12s}.aa .phase:nth-child(3){transition-delay:.19s}.aa .phase:nth-child(4){transition-delay:.26s}
+.phase:hover{filter:brightness(1.15)}
+.phase-period{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.04em;opacity:.6;margin-bottom:8px}
+.phase-title{font-size:17px;font-weight:700;margin-bottom:4px;letter-spacing:-.01em}
+.phase-stat{font-family:var(--mono);font-size:24px;font-weight:700;margin:8px 0 4px}
+.phase-desc{font-size:12px;opacity:.5;line-height:1.4}
+
+/* HEATMAP */
+.hm-g{display:grid;grid-template-columns:repeat(12,1fr);gap:4px}
+.hm{border-radius:8px;padding:12px 4px;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid transparent;cursor:default;opacity:0;transform:scale(.7)}
+.aa .hm{opacity:1;transform:scale(1);transition:all .35s var(--ease)}
+.hm:hover{transform:scale(1.08);border-color:rgba(255,255,255,.12)}
+.hm-n{font-family:var(--mono);font-weight:700;font-size:16px;line-height:1.2}
+.hm-m{font-size:10px;color:var(--t-ds);font-weight:500;margin-top:2px}
+
+/* generate stagger delays for 12 hm children */
+.aa .hm:nth-child(1){transition-delay:.03s}.aa .hm:nth-child(2){transition-delay:.06s}.aa .hm:nth-child(3){transition-delay:.09s}.aa .hm:nth-child(4){transition-delay:.12s}.aa .hm:nth-child(5){transition-delay:.15s}.aa .hm:nth-child(6){transition-delay:.18s}.aa .hm:nth-child(7){transition-delay:.21s}.aa .hm:nth-child(8){transition-delay:.24s}.aa .hm:nth-child(9){transition-delay:.27s}.aa .hm:nth-child(10){transition-delay:.3s}.aa .hm:nth-child(11){transition-delay:.33s}.aa .hm:nth-child(12){transition-delay:.36s}
+
+/* VENUE */
+.v-list{display:flex;flex-direction:column;gap:12px;max-width:600px;margin:32px auto 0}
+.v-i{display:flex;align-items:center;gap:14px;opacity:0;transform:translateX(-16px)}
+.aa .v-i{opacity:1;transform:none;transition:all .4s var(--ease)}
+.aa .v-i:nth-child(1){transition-delay:.05s}.aa .v-i:nth-child(2){transition-delay:.12s}.aa .v-i:nth-child(3){transition-delay:.19s}
+.v-name{width:160px;font-size:15px;font-weight:500;text-align:right;flex-shrink:0}
+.v-bar{height:28px;border-radius:6px;min-width:8px;transition:filter .2s}
+.v-i:hover .v-bar{filter:brightness(1.15)}
+.v-pct{font-family:var(--mono);font-size:13px;font-weight:600;flex-shrink:0;min-width:48px}
+.v-n{font-family:var(--mono);font-size:12px;color:var(--t-ls);flex-shrink:0}
+
+/* IMPACT (before/after comparison) */
+.impact{display:grid;grid-template-columns:1fr auto 1fr;gap:0;margin-top:40px;align-items:stretch}
+.impact-col{padding:32px;text-align:center;border-radius:16px;opacity:0;transform:translateY(20px)}
+.aa .impact-col{opacity:1;transform:none;transition:all .5s var(--ease)}
+.aa .impact-col:nth-child(1){transition-delay:.05s}
+.aa .impact-col:nth-child(2){transition-delay:.15s}
+.aa .impact-col:nth-child(3){transition-delay:.25s}
+.impact-label{font-size:13px;font-weight:600;letter-spacing:.02em;margin-bottom:16px;opacity:.6}
+.impact-num{font-family:var(--mono);font-size:clamp(32px,4vw,48px);font-weight:700;line-height:1.1}
+.impact-sub{font-size:13px;margin-top:6px;opacity:.5}
+.impact-arrow{display:flex;align-items:center;justify-content:center;padding:0 16px;opacity:0}
+.aa .impact-arrow{opacity:1;transition:opacity .4s .2s var(--ease)}
+.impact-arrow svg{width:32px;height:32px;color:var(--green)}
+
+/* TABLE */
+.tbl{overflow-x:auto;border-radius:16px;background:var(--bg-w);border:1px solid #d2d2d7}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+th{text-align:left;padding:10px 14px;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--t-ls);background:#fafafa;border-bottom:1px solid #e8e8ed;font-weight:600;position:sticky;top:0;z-index:1}
+td{padding:9px 14px;border-bottom:1px solid #f0f0f5;font-size:13px;font-family:var(--mono);color:var(--t-lp)}
+th.r,td.r{text-align:right}
+tbody tr{transition:background .12s}
+tbody tr:hover{background:#f0f5ff}
+.y-2024{border-left:3px solid var(--blue)}
+.y-2025{border-left:3px solid var(--green)}
+.y-2026{border-left:3px solid var(--orange)}
+.dur-2h{color:var(--green);font-weight:600}
+
+/* SCROLLREVEAL */
+.rv{opacity:0;transform:translateY(30px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.rv.vis{opacity:1;transform:none}
+
+.note{font-size:12px;margin-top:14px;text-align:center}
+.note-d{color:var(--t-ds)}.note-l{color:var(--t-ls)}
+
+footer{background:var(--bg-l);padding:32px 22px;text-align:center;color:var(--t-ls);font-size:12px;border-top:1px solid #d2d2d7}
+footer p+p{margin-top:2px}
+
+/* SEPARATOR */
+.sep{width:40px;height:3px;border-radius:2px;margin:20px auto 0;opacity:.3}
+
+/* RESPONSIVE */
+@media(max-width:1068px){.si{padding:64px 22px;min-height:70vh}.si.hp{min-height:75vh;padding:80px 22px 64px}.si.ah{min-height:auto}}
+@media(max-width:734px){
+  .kpi-g{grid-template-columns:repeat(2,1fr)}
+  .si{padding:48px 16px;min-height:60vh}.si.hp{min-height:65vh;padding:56px 16px 48px}.si.ah{min-height:auto}
+  .gn-r{display:none}
+  .phases{grid-template-columns:1fr 1fr}
+  .hm-g{grid-template-columns:repeat(6,1fr);gap:6px}.hm{padding:14px 6px}.hm-n{font-size:18px}
+  .impact{grid-template-columns:1fr;gap:12px}.impact-arrow{transform:rotate(90deg);padding:8px 0}
+  .v-name{width:100px;font-size:13px}
+  .bars{height:170px}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}html{scroll-behavior:auto}.rv{opacity:1;transform:none}.kpi,.phase,.hm,.v-i,.impact-col,.impact-arrow,.b,.bv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="gn"><div class="gn-in">
+  <div class="gn-b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/></svg>Coach Report</div>
+  <div class="gn-r"><span>叶伟力教练</span><span>73 课时</span><span>87 小时</span></div>
+</div></nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<div class="hero-grad sd">
+  <div class="si hp">
+    <div class="rv">
+      <p class="label" style="color:var(--t-ds);margin-bottom:12px">Nicholas × 叶伟力教练</p>
+      <h1 class="h-hero hero-title">学球报告</h1>
+      <p class="h-sub" style="color:var(--t-ds);margin-top:16px">2024 年 5 月 9 日至今 · 23 个月持续训练<br>从周均 1 次到周均 2.5 次的训练密度蜕变</p>
+      <div class="sep" style="background:var(--green)"></div>
+    </div>
+    <div class="kpi-g aa rv" style="transition-delay:.15s" id="hero-kpi">
+      <div class="kpi"><div class="kpi-n" style="color:var(--t-dp)" data-count="73">0</div><div class="kpi-l">总课时</div></div>
+      <div class="kpi"><div class="kpi-n" style="color:var(--green)" data-count="87">0</div><div class="kpi-l">总训练时长 (h)</div><div class="kpi-d" style="color:var(--green);background:rgba(48,209,88,.1)">1.19h/课</div></div>
+      <div class="kpi"><div class="kpi-n" style="color:var(--blue)" data-count="23">0</div><div class="kpi-l">持续月数</div><div class="kpi-d" style="color:var(--blue);background:rgba(41,151,255,.1)">3.2 课/月</div></div>
+      <div class="kpi"><div class="kpi-n" style="color:var(--orange)" data-count="3">0</div><div class="kpi-l">训练场地</div><div class="kpi-d" style="color:var(--orange);background:rgba(255,159,10,.1)">拓普系列</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ 四阶段 ═══════════ -->
+<div class="sd" style="border-top:1px solid rgba(255,255,255,.04)">
+  <div class="si w">
+    <h2 class="h-sec rv" style="margin-bottom:8px">训练四阶段</h2>
+    <p class="h-sub rv" style="color:var(--t-ds)">从建立节奏到强度翻倍，再到稳定输出</p>
+    <div class="phases aa">
+      <div class="phase" style="background:rgba(41,151,255,.08)">
+        <div class="phase-period" style="color:var(--blue)">2024.05 — 2024.12</div>
+        <div class="phase-title">建立节奏</div>
+        <div class="phase-stat" style="color:var(--blue)">27<span style="font-size:14px;opacity:.5"> 课时</span></div>
+        <div class="phase-desc">每课 1 小时 · 周均 0.8 次<br>拓普琶洲为主 · 建立固定周五训练</div>
+      </div>
+      <div class="phase" style="background:rgba(48,209,88,.08)">
+        <div class="phase-period" style="color:var(--green)">2025.01 — 2025.04</div>
+        <div class="phase-title">稳定推进</div>
+        <div class="phase-stat" style="color:var(--green)">12<span style="font-size:14px;opacity:.5"> 课时</span></div>
+        <div class="phase-desc">每课 1 小时 · 周均 0.7 次<br>新增万胜围、新港东场地</div>
+      </div>
+      <div class="phase" style="background:rgba(191,90,242,.08)">
+        <div class="phase-period" style="color:var(--purple)">2025.05 — 2025.09</div>
+        <div class="phase-title">强度翻倍</div>
+        <div class="phase-stat" style="color:var(--purple)">17<span style="font-size:14px;opacity:.5"> 课时</span></div>
+        <div class="phase-desc">14 课升至 2 小时 · 周均 0.8 次<br>单课时长翻倍，技术深度突破</div>
+      </div>
+      <div class="phase" style="background:rgba(255,159,10,.08)">
+        <div class="phase-period" style="color:var(--orange)">2025.10 — 2026.03</div>
+        <div class="phase-title">持续输出</div>
+        <div class="phase-stat" style="color:var(--orange)">17<span style="font-size:14px;opacity:.5"> 课时</span></div>
+        <div class="phase-desc">回归 1 小时 · 周均 0.7 次<br>以稳定节奏巩固成果</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ 月度分布 ═══════════ -->
+<div class="sd" style="border-top:1px solid rgba(255,255,255,.04)">
+  <div class="si w">
+    <h2 class="h-sec rv" style="margin-bottom:8px">月度课时分布</h2>
+    <p class="h-sub rv" style="color:var(--t-ds)">23 个月训练轨迹，覆盖每一个季节</p>
+    <div class="rv" style="margin-top:40px">
+      <div style="font-size:13px;font-weight:600;color:var(--t-ds);margin-bottom:12px">2024</div>
+      <div class="bars aa" style="height:140px">
+        <div class="bg"><div class="bv">3</div><div class="b" style="height:75%;background:var(--blue);animation-delay:.05s"></div><div class="bl">5月</div></div>
+        <div class="bg"><div class="bv">3</div><div class="b" style="height:75%;background:var(--blue);animation-delay:.1s"></div><div class="bl">6月</div></div>
+        <div class="bg"><div class="bv">2</div><div class="b" style="height:50%;background:var(--blue);animation-delay:.15s"></div><div class="bl">7月</div></div>
+        <div class="bg"><div class="bv">4</div><div class="b" style="height:100%;background:var(--blue);animation-delay:.2s"></div><div class="bl">8月</div></div>
+        <div class="bg"><div class="bv">4</div><div class="b" style="height:100%;background:var(--blue);animation-delay:.25s"></div><div class="bl">9月</div></div>
+        <div class="bg"><div class="bv">3</div><div class="b" style="height:75%;background:var(--blue);animation-delay:.3s"></div><div class="bl">10月</div></div>
+        <div class="bg"><div class="bv">4</div><div class="b" style="height:100%;background:var(--blue);animation-delay:.35s"></div><div class="bl">11月</div></div>
+        <div class="bg"><div class="bv">4</div><div class="b" style="height:100%;background:var(--blue);animation-delay:.4s"></div><div class="bl">12月</div></div>
+      </div>
+    </div>
+    <div class="rv" style="margin-top:40px">
+      <div style="font-size:13px;font-weight:600;color:var(--t-ds);margin-bottom:12px">2025 <span style="opacity:.4;font-weight:400">— 绿色 = 2h 课时</span></div>
+      <div class="bars aa" style="height:160px">
+        <div class="bg"><div class="bv">3</div><div class="b" style="height:37.5%;background:var(--blue);animation-delay:.05s"></div><div class="bl">1月</div></div>
+        <div class="bg"><div class="bv">3</div><div class="b" style="height:37.5%;background:var(--blue);animation-delay:.1s"></div><div class="bl">2月</div></div>
+        <div class="bg"><div class="bv">3</div><div class="b" style="height:37.5%;background:var(--blue);animation-delay:.15s"></div><div class="bl">3月</div></div>
+        <div class="bg"><div class="bv">3</div><div class="b" style="height:37.5%;background:var(--blue);animation-delay:.2s"></div><div class="bl">4月</div></div>
+        <div class="bg"><div class="bv">6h</div><div class="b" style="height:75%;background:var(--green);animation-delay:.25s"></div><div class="bl">5月</div></div>
+        <div class="bg"><div class="bv">2h</div><div class="b" style="height:25%;background:var(--green);animation-delay:.3s"></div><div class="bl">6月</div></div>
+        <div class="bg"><div class="bv">6h</div><div class="b" style="height:75%;background:var(--green);animation-delay:.35s"></div><div class="bl">7月</div></div>
+        <div class="bg"><div class="bv">8h</div><div class="b" style="height:100%;background:var(--green);animation-delay:.4s"></div><div class="bl">8月</div></div>
+        <div class="bg"><div class="bv">7h</div><div class="b" style="height:87.5%;background:linear-gradient(180deg,var(--green),var(--blue));animation-delay:.45s"></div><div class="bl">9月</div></div>
+        <div class="bg"><div class="bv">4</div><div class="b" style="height:50%;background:var(--blue);animation-delay:.5s"></div><div class="bl">10月</div></div>
+        <div class="bg"><div class="bv">4</div><div class="b" style="height:50%;background:var(--blue);animation-delay:.55s"></div><div class="bl">11月</div></div>
+        <div class="bg"><div class="bv">4</div><div class="b" style="height:50%;background:var(--blue);animation-delay:.6s"></div><div class="bl">12月</div></div>
+      </div>
+    </div>
+    <div class="rv" style="margin-top:40px">
+      <div style="font-size:13px;font-weight:600;color:var(--t-ds);margin-bottom:12px">2026</div>
+      <div class="bars aa" style="height:120px">
+        <div class="bg"><div class="bv">4</div><div class="b" style="height:100%;background:var(--orange);animation-delay:.05s"></div><div class="bl">1月</div></div>
+        <div class="bg"><div class="bv">1</div><div class="b" style="height:25%;background:var(--orange);animation-delay:.1s"></div><div class="bl">2月</div></div>
+        <div class="bg"><div class="bv">2</div><div class="b" style="height:50%;background:var(--orange);animation-delay:.15s"></div><div class="bl">3月</div></div>
+      </div>
+    </div>
+    <p class="note note-d rv">Peak: 2025年8月 (8h / 4课) · 2h 课时集中在 2025.05–2025.09</p>
+  </div>
+</div>
+
+<!-- ═══════════ 场地 (LIGHT) ═══════════ -->
+<div class="sl">
+  <div class="si n">
+    <h2 class="h-sec rv" style="margin-bottom:8px">训练场地</h2>
+    <p class="h-sub rv" style="color:var(--t-ls)">三大拓普场地，全部位于广州海珠区</p>
+    <div class="v-list aa">
+      <div class="v-i"><span class="v-name">拓普琶洲</span><div class="v-bar" style="width:63%;background:var(--blue)"></div><span class="v-pct" style="color:var(--blue)">63%</span><span class="v-n">46 课</span></div>
+      <div class="v-i"><span class="v-name">拓普万胜围</span><div class="v-bar" style="width:23%;background:var(--green)"></div><span class="v-pct" style="color:var(--green)">23%</span><span class="v-n">17 课</span></div>
+      <div class="v-i"><span class="v-name">拓普新港东</span><div class="v-bar" style="width:14%;background:var(--purple)"></div><span class="v-pct" style="color:var(--purple)">14%</span><span class="v-n">10 课</span></div>
+    </div>
+    <p class="note note-l rv">琶洲为核心训练基地，占比近 2/3 · 2025 年起新增万胜围和新港东分流</p>
+  </div>
+</div>
+
+<!-- ═══════════ IMPACT (DARK) ═══════════ -->
+<div class="sd">
+  <div class="si">
+    <h2 class="h-sec rv" style="margin-bottom:8px">教练效果</h2>
+    <p class="h-sub rv" style="color:var(--t-ds)">叶伟力教练前后的训练数据对比</p>
+    <div class="impact aa">
+      <div class="impact-col" style="background:rgba(255,255,255,.03);border-radius:16px">
+        <div class="impact-label">BEFORE · 2023 全年</div>
+        <div class="impact-num" style="color:var(--t-ds)">54</div>
+        <div class="impact-sub" style="color:var(--t-ds)">场次/年</div>
+        <div style="margin-top:16px;font-family:var(--mono);font-size:13px;color:var(--t-ds)">89.3h · 1.0 次/周</div>
+      </div>
+      <div class="impact-arrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+      <div class="impact-col" style="background:rgba(48,209,88,.06);border-radius:16px;border:1px solid rgba(48,209,88,.12)">
+        <div class="impact-label" style="color:var(--green)">AFTER · 2025 全年</div>
+        <div class="impact-num" style="color:var(--green)">130</div>
+        <div class="impact-sub" style="color:var(--green)">场次/年</div>
+        <div style="margin-top:16px;font-family:var(--mono);font-size:13px;color:var(--green)">218.3h · 2.5 次/周 · <strong>+141%</strong></div>
+      </div>
+    </div>
+    <p class="note note-d rv" style="margin-top:24px">跟随叶教练后，年训练场次增长 141%，周均频率从 1.0 提升至 2.5 次<br>个人训练从 0 次暴增至 26 次/年，训练自主性显著增强</p>
+  </div>
+</div>
+
+<!-- ═══════════ 年度对比 (LIGHT) ═══════════ -->
+<div class="sl">
+  <div class="si w">
+    <h2 class="h-sec rv" style="margin-bottom:8px">年度课时明细</h2>
+    <p class="h-sub rv" style="color:var(--t-ls)">按年对比课时数、时长、频率的变化</p>
+    <div class="rv tbl" style="margin-top:32px">
+      <table>
+        <thead><tr><th>年份</th><th class="r">课时</th><th class="r">1h 课</th><th class="r">2h 课</th><th class="r">总时长</th><th class="r">月均</th><th class="r">场均时长</th></tr></thead>
+        <tbody>
+          <tr class="y-2024"><td style="font-weight:600;color:var(--blue-l)">2024</td><td class="r">27</td><td class="r">27</td><td class="r">0</td><td class="r">27h</td><td class="r">3.4</td><td class="r">1.0h</td></tr>
+          <tr class="y-2025"><td style="font-weight:600;color:var(--green)">2025</td><td class="r">39</td><td class="r">25</td><td class="r" style="color:var(--green);font-weight:600">14</td><td class="r" style="font-weight:600">53h</td><td class="r">3.3</td><td class="r">1.36h</td></tr>
+          <tr class="y-2026"><td style="font-weight:600;color:var(--orange)">2026*</td><td class="r">7</td><td class="r">7</td><td class="r">0</td><td class="r">7h</td><td class="r">2.3</td><td class="r">1.0h</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note note-l rv">* 2026 截至 3 月 · 2025 年 14 次 2h 课时集中在 5–9 月</p>
+  </div>
+</div>
+
+<!-- ═══════════ 完整记录 (LIGHT) ═══════════ -->
+<div class="sw">
+  <div class="si w ah">
+    <h2 class="h-sec rv" style="margin-bottom:32px">完整课时记录</h2>
+    <div class="rv tbl">
+      <table>
+        <thead><tr><th>日期</th><th>时间</th><th class="r">时长</th><th>场地</th></tr></thead>
+        <tbody>
+          <tr class="y-2024"><td>2024-05-09</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2024"><td>2024-05-23</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2024"><td>2024-05-30</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2024"><td>2024-06-07</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普万胜围</td></tr>
+          <tr class="y-2024"><td>2024-06-14</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2024"><td>2024-06-28</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2024"><td>2024-07-19</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2024"><td>2024-07-26</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2024"><td>2024-08-02</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2024"><td>2024-08-09</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2024"><td>2024-08-16</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2024"><td>2024-08-30</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2024"><td>2024-09-06</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2024"><td>2024-09-13</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2024"><td>2024-09-20</td><td>19:30–20:30</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2024"><td>2024-09-27</td><td>19:30–20:30</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2024"><td>2024-10-11</td><td>19:30–20:30</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2024"><td>2024-10-18</td><td>19:30–20:30</td><td class="r">1.0h</td><td>拓普万胜围</td></tr>
+          <tr class="y-2024"><td>2024-10-25</td><td>19:30–20:30</td><td class="r">1.0h</td><td>拓普万胜围</td></tr>
+          <tr class="y-2024"><td>2024-11-01</td><td>19:30–20:30</td><td class="r">1.0h</td><td>拓普万胜围</td></tr>
+          <tr class="y-2024"><td>2024-11-08</td><td>18:30–19:30</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2024"><td>2024-11-15</td><td>18:30–19:30</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2024"><td>2024-11-22</td><td>18:30–19:30</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2024"><td>2024-12-04</td><td>20:00–21:00</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2024"><td>2024-12-13</td><td>18:30–19:30</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2024"><td>2024-12-20</td><td>18:00–19:00</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2024"><td>2024-12-27</td><td>18:00–19:00</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2025"><td>2025-01-03</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2025"><td>2025-01-10</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2025"><td>2025-01-24</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2025"><td>2025-02-14</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2025"><td>2025-02-21</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2025"><td>2025-02-28</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普万胜围</td></tr>
+          <tr class="y-2025"><td>2025-03-14</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普万胜围</td></tr>
+          <tr class="y-2025"><td>2025-03-21</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普新港东</td></tr>
+          <tr class="y-2025"><td>2025-03-28</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普万胜围</td></tr>
+          <tr class="y-2025"><td>2025-04-02</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普万胜围</td></tr>
+          <tr class="y-2025"><td>2025-04-18</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普万胜围</td></tr>
+          <tr class="y-2025"><td>2025-04-30</td><td>18:00–19:00</td><td class="r">1.0h</td><td>拓普万胜围</td></tr>
+          <tr class="y-2025"><td>2025-05-09</td><td>19:00–21:00</td><td class="r dur-2h">2.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2025"><td>2025-05-16</td><td>19:00–21:00</td><td class="r dur-2h">2.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2025"><td>2025-05-23</td><td>19:00–21:00</td><td class="r dur-2h">2.0h</td><td>拓普万胜围</td></tr>
+          <tr class="y-2025"><td>2025-06-06</td><td>19:00–21:00</td><td class="r dur-2h">2.0h</td><td>拓普新港东</td></tr>
+          <tr class="y-2025"><td>2025-07-11</td><td>19:00–21:00</td><td class="r dur-2h">2.0h</td><td>拓普万胜围</td></tr>
+          <tr class="y-2025"><td>2025-07-18</td><td>19:00–21:00</td><td class="r dur-2h">2.0h</td><td>拓普万胜围</td></tr>
+          <tr class="y-2025"><td>2025-07-25</td><td>19:00–21:00</td><td class="r dur-2h">2.0h</td><td>拓普万胜围</td></tr>
+          <tr class="y-2025"><td>2025-08-01</td><td>19:00–21:00</td><td class="r dur-2h">2.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2025"><td>2025-08-15</td><td>19:00–21:00</td><td class="r dur-2h">2.0h</td><td>拓普万胜围</td></tr>
+          <tr class="y-2025"><td>2025-08-22</td><td>19:00–21:00</td><td class="r dur-2h">2.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2025"><td>2025-08-29</td><td>19:00–21:00</td><td class="r dur-2h">2.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2025"><td>2025-09-05</td><td>19:00–21:00</td><td class="r dur-2h">2.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2025"><td>2025-09-12</td><td>19:00–21:00</td><td class="r dur-2h">2.0h</td><td>拓普新港东</td></tr>
+          <tr class="y-2025"><td>2025-09-18</td><td>19:00–21:00</td><td class="r dur-2h">2.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2025"><td>2025-09-26</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2025"><td>2025-10-03</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2025"><td>2025-10-10</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2025"><td>2025-10-17</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普新港东</td></tr>
+          <tr class="y-2025"><td>2025-10-24</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2025"><td>2025-11-07</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2025"><td>2025-11-14</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2025"><td>2025-11-21</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2025"><td>2025-11-28</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2025"><td>2025-12-05</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2025"><td>2025-12-12</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2025"><td>2025-12-19</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2025"><td>2025-12-26</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2026"><td>2026-01-09</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2026"><td>2026-01-16</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2026"><td>2026-01-23</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2026"><td>2026-01-30</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2026"><td>2026-02-06</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2026"><td>2026-03-13</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+          <tr class="y-2026"><td>2026-03-20</td><td>19:00–20:00</td><td class="r">1.0h</td><td>拓普琶洲</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>Data: Obsidian Personal-Vault/Tennis · Generated 2026-04-07</p>
+  <p>Nicholas × 叶伟力教练 · 73 课时 · 87 小时 · 23 个月</p>
+</footer>
+
+<script>
+function animC(){document.querySelectorAll('[data-count]').forEach(el=>{const t=parseFloat(el.dataset.count),f=t%1!==0,d=1400,t0=performance.now();(function k(n){const p=Math.min((n-t0)/d,1),e=1-Math.pow(1-p,4);el.textContent=f?(t*e).toFixed(1):Math.round(t*e);if(p<1)requestAnimationFrame(k)})(t0)})}
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target)}})},{threshold:.06,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+const ao=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('aa');ao.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -60px 0px'});
+document.querySelectorAll('.aa:not(.aa),.bars,.phases,.hm-g,.v-list,.impact,.kpi-g').forEach(el=>ao.observe(el));
+// re-observe elements that need aa but aren't observed yet
+document.querySelectorAll('[class*="aa"]').forEach(el=>{if(!el.classList.contains('aa')){ao.observe(el)}});
+const ho=new IntersectionObserver(es=>{if(es[0].isIntersecting){animC();ho.disconnect()}},{threshold:.2});
+ho.observe(document.getElementById('hero-kpi'));
+</script>
+</body>
+</html>

@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tennis — Nicholas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════════
+   APPLE-INSPIRED DESIGN TOKENS
+   ══════════════════════════════════════════════════════ */
+:root {
+  /* Surfaces */
+  --bg-dark: #000;
+  --bg-dark-elevated: #161617;
+  --bg-light: #f5f5f7;
+  --bg-white: #fff;
+
+  /* Text */
+  --text-dark-primary: #f5f5f7;
+  --text-dark-secondary: #86868b;
+  --text-light-primary: #1d1d1f;
+  --text-light-secondary: #6e6e73;
+
+  /* Accent */
+  --blue: #2997ff;
+  --blue-light: #06c;
+  --green: #30d158;
+  --green-subtle: #34c759;
+  --orange: #ff9f0a;
+  --red: #ff453a;
+  --purple: #bf5af2;
+  --pink: #ff375f;
+  --cyan: #64d2ff;
+  --teal: #30b0c7;
+
+  /* Fonts */
+  --sans: 'Inter', 'Noto Sans SC', -apple-system, 'PingFang SC', 'Helvetica Neue', sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
+
+  /* Nav */
+  --nav-height: 44px;
+}
+
+/* ══════════════════════════════════════════════════════
+   RESET
+   ══════════════════════════════════════════════════════ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body { font-family: var(--sans); color: var(--text-light-primary); line-height: 1.47; font-size: 17px; background: var(--bg-white); overflow-x: hidden; }
+
+/* ══════════════════════════════════════════════════════
+   NAV — Frosted Glass
+   ══════════════════════════════════════════════════════ */
+.gn { position: sticky; top: 0; z-index: 9999; height: var(--nav-height); background: rgba(22,22,23,.82); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid rgba(255,255,255,.08); display: flex; align-items: center; justify-content: center; }
+.gn-inner { max-width: 1024px; width: 100%; padding: 0 22px; display: flex; align-items: center; justify-content: space-between; }
+.gn-brand { font-size: 14px; font-weight: 600; color: var(--text-dark-primary); letter-spacing: -.01em; display: flex; align-items: center; gap: 6px; }
+.gn-brand svg { width: 16px; height: 16px; color: var(--green); }
+.gn-links { display: flex; gap: 24px; font-size: 12px; color: var(--text-dark-secondary); font-weight: 400; }
+.gn-links span { transition: color .3s; cursor: default; }
+.gn-links span:hover { color: var(--text-dark-primary); }
+
+/* ══════════════════════════════════════════════════════
+   FULL-WIDTH SECTIONS (Apple style)
+   ══════════════════════════════════════════════════════ */
+.section-dark { background: var(--bg-dark); color: var(--text-dark-primary); }
+.section-light { background: var(--bg-light); color: var(--text-light-primary); }
+.section-white { background: var(--bg-white); color: var(--text-light-primary); }
+
+.section-inner { max-width: 980px; margin: 0 auto; padding: 80px 22px; min-height: 80vh; display: flex; flex-direction: column; justify-content: center; }
+.section-inner.wide { max-width: 1120px; }
+.section-inner.narrow { max-width: 820px; }
+.section-inner.hero-pad { padding: 110px 22px 90px; min-height: 85vh; }
+.section-inner.auto-h { min-height: auto; }
+
+/* ══════════════════════════════════════════════════════
+   TYPOGRAPHY (Apple scale)
+   ══════════════════════════════════════════════════════ */
+.headline-hero { font-size: clamp(48px, 7vw, 80px); font-weight: 800; letter-spacing: -.04em; line-height: 1.05; text-align: center; }
+.headline-large { font-size: clamp(32px, 4.5vw, 56px); font-weight: 700; letter-spacing: -.03em; line-height: 1.07; text-align: center; }
+.headline-section { font-size: clamp(28px, 3.5vw, 48px); font-weight: 700; letter-spacing: -.025em; line-height: 1.1; text-align: center; }
+.subhead { font-size: clamp(17px, 2vw, 24px); font-weight: 400; line-height: 1.35; text-align: center; max-width: 680px; margin: 0 auto; }
+.subhead-dark { color: var(--text-dark-secondary); }
+.subhead-light { color: var(--text-light-secondary); }
+.label { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; font-weight: 600; }
+
+/* ══════════════════════════════════════════════════════
+   HERO — Big KPI
+   ══════════════════════════════════════════════════════ */
+.hero-gradient { background: linear-gradient(180deg, #000 0%, #0a0a0a 60%, #111 100%); }
+.hero-title { background: linear-gradient(135deg, #64d2ff 0%, var(--blue) 30%, var(--green) 70%, #30d158 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; margin-top: 56px; background: rgba(255,255,255,.06); border-radius: 20px; overflow: hidden; }
+.kpi { background: rgba(255,255,255,.03); padding: 32px 16px; text-align: center; transition: background .3s, opacity .5s cubic-bezier(.16,1,.3,1), transform .5s cubic-bezier(.16,1,.3,1); opacity: 0; transform: translateY(16px); }
+.anim-active .kpi { opacity: 1; transform: none; }
+.anim-active .kpi:nth-child(1) { transition-delay: .05s; }
+.anim-active .kpi:nth-child(2) { transition-delay: .1s; }
+.anim-active .kpi:nth-child(3) { transition-delay: .15s; }
+.anim-active .kpi:nth-child(4) { transition-delay: .2s; }
+.anim-active .kpi:nth-child(5) { transition-delay: .25s; }
+.kpi:hover { background: rgba(255,255,255,.06); }
+.kpi-n { font-family: var(--mono); font-size: clamp(28px, 4vw, 44px); font-weight: 700; letter-spacing: -.02em; line-height: 1.1; }
+.kpi-l { font-size: 12px; color: var(--text-dark-secondary); margin-top: 6px; text-transform: uppercase; letter-spacing: .08em; font-weight: 500; }
+.kpi-delta { display: inline-block; font-size: 11px; font-family: var(--mono); font-weight: 600; padding: 2px 8px; border-radius: 6px; margin-top: 8px; }
+
+/* ══════════════════════════════════════════════════════
+   CHART CONTAINERS
+   ══════════════════════════════════════════════════════ */
+.chart-title { font-size: 21px; font-weight: 600; letter-spacing: -.015em; margin-bottom: 24px; }
+.chart-subtitle { font-size: 14px; color: var(--text-dark-secondary); margin-top: 16px; line-height: 1.5; }
+.chart-subtitle-light { font-size: 14px; color: var(--text-light-secondary); margin-top: 16px; line-height: 1.5; }
+
+/* ══════════════════════════════════════════════════════
+   BAR CHART
+   ══════════════════════════════════════════════════════ */
+.bars { display: flex; align-items: flex-end; gap: 6px; height: 220px; padding-top: 20px; }
+.bg { flex: 1; display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; }
+.b { width: 100%; max-width: 52px; border-radius: 8px 8px 3px 3px; transition: all .3s cubic-bezier(.16,1,.3,1); cursor: default; transform-origin: bottom; }
+.b:hover { filter: brightness(1.2); transform: scaleX(1.05); }
+.bv { font-family: var(--mono); font-size: 13px; color: var(--text-dark-secondary); margin-bottom: 6px; font-weight: 600; transition: color .2s; }
+.bg:hover .bv { color: var(--text-dark-primary); }
+.bl { font-size: 12px; color: var(--text-dark-secondary); margin-top: 8px; font-weight: 500; }
+.b-growth { font-size: 11px; font-family: var(--mono); font-weight: 600; color: var(--green); text-align: center; margin-bottom: 2px; }
+.b-growth.neg { color: var(--red); }
+
+/* Animate — scroll triggered */
+.b { transform: scaleY(0); transform-origin: bottom; }
+.anim-active .b { animation: growUp .8s cubic-bezier(.16,1,.3,1) both; }
+@keyframes growUp { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+.b-growth { opacity: 0; }
+.anim-active .b-growth { animation: fadeUp .4s .9s cubic-bezier(.16,1,.3,1) both; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ══════════════════════════════════════════════════════
+   STACKED BARS
+   ══════════════════════════════════════════════════════ */
+.legend { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 16px; }
+.legend span { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-dark-secondary); font-weight: 500; }
+.legend i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+.sb { display: flex; flex-direction: column; gap: 5px; }
+.sr { display: flex; align-items: center; gap: 10px; padding: 3px 0; border-radius: 8px; transition: background .2s; }
+.sr:hover { background: rgba(255,255,255,.03); }
+.sr-y { width: 36px; font-family: var(--mono); font-size: 13px; color: var(--text-dark-secondary); text-align: right; flex-shrink: 0; font-weight: 500; }
+.sr:hover .sr-y { color: var(--text-dark-primary); }
+.sr-bar { flex: 1; height: 24px; background: rgba(255,255,255,.04); border-radius: 5px; display: flex; overflow: hidden; }
+.sr-seg { height: 100%; transition: filter .2s; }
+.sr-seg:hover { filter: brightness(1.35); }
+.sr-h { width: 52px; font-family: var(--mono); font-size: 12px; color: var(--text-dark-secondary); text-align: right; flex-shrink: 0; font-weight: 500; }
+
+/* ══════════════════════════════════════════════════════
+   DONUT
+   ══════════════════════════════════════════════════════ */
+.donut-flex { display: flex; align-items: center; gap: 48px; justify-content: center; flex-wrap: wrap; }
+.donut-box { position: relative; width: 200px; height: 200px; }
+.donut-svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.donut-svg circle { fill: none; }
+.d-track { stroke: rgba(255,255,255,.05); stroke-width: 12; }
+.d-seg { stroke-width: 12; stroke-linecap: round; stroke-dasharray: 0 999; }
+.anim-active .d-seg { animation: drawArc 1.4s cubic-bezier(.16,1,.3,1) both; }
+@keyframes drawArc { from { stroke-dasharray: 0 999; } }
+.donut-mid { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); text-align: center; }
+.donut-mid .dn { font-family: var(--mono); font-size: 36px; font-weight: 700; line-height: 1; }
+.donut-mid .dl { font-size: 11px; color: var(--text-dark-secondary); text-transform: uppercase; letter-spacing: .08em; font-weight: 500; margin-top: 4px; }
+.d-legend { display: flex; flex-direction: column; gap: 6px; }
+.d-li { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 500; padding: 8px 12px; border-radius: 10px; transition: background .2s; cursor: default; }
+.d-li:hover { background: rgba(255,255,255,.05); }
+.d-dot { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+.d-pct { margin-left: auto; font-family: var(--mono); font-size: 13px; color: var(--text-dark-secondary); }
+
+/* ══════════════════════════════════════════════════════
+   HEATMAP
+   ══════════════════════════════════════════════════════ */
+.heatmap { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+.hm { border-radius: 12px; padding: 16px 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: all .25s cubic-bezier(.16,1,.3,1); cursor: default; border: 1px solid transparent; }
+.hm:hover { transform: scale(1.06); border-color: rgba(255,255,255,.12); }
+.hm-n { font-family: var(--mono); font-weight: 700; font-size: 22px; line-height: 1.2; }
+.hm-m { font-size: 12px; color: var(--text-dark-secondary); font-weight: 500; margin-top: 3px; }
+
+/* ══════════════════════════════════════════════════════
+   DATA TABLE (Light section)
+   ══════════════════════════════════════════════════════ */
+.tbl-wrap { overflow-x: auto; border-radius: 16px; background: var(--bg-white); border: 1px solid #d2d2d7; }
+table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+th { text-align: left; padding: 12px 16px; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--text-light-secondary); background: #fafafa; border-bottom: 1px solid #e8e8ed; font-weight: 600; position: sticky; top: 0; z-index: 1; }
+td { padding: 11px 16px; border-bottom: 1px solid #f0f0f5; font-size: 14px; font-family: var(--mono); font-weight: 400; color: var(--text-light-primary); }
+th.r, td.r { text-align: right; }
+tbody tr { transition: background .15s; }
+tbody tr:hover { background: #f0f5ff; }
+.hl { color: var(--blue-light); font-weight: 600; }
+.peak td { background: rgba(48,209,88,.04); }
+.peak:hover td { background: rgba(48,209,88,.08); }
+
+/* ══════════════════════════════════════════════════════
+   RANKING BARS (Dark)
+   ══════════════════════════════════════════════════════ */
+.rank-list { display: flex; flex-direction: column; gap: 10px; }
+.rank-i { display: flex; align-items: center; gap: 12px; }
+.rank-i:hover .rank-bar { filter: brightness(1.2); }
+.rank-pos { font-family: var(--mono); font-size: 12px; color: var(--text-dark-secondary); width: 18px; text-align: right; flex-shrink: 0; font-weight: 600; }
+.rank-name { width: 140px; font-size: 14px; color: var(--text-dark-secondary); text-align: right; flex-shrink: 0; font-weight: 500; }
+.rank-bar { height: 22px; border-radius: 5px; min-width: 6px; transition: filter .2s; }
+.rank-count { font-family: var(--mono); font-size: 12px; color: var(--text-dark-secondary); flex-shrink: 0; font-weight: 500; }
+.rank-tag { font-size: 11px; color: rgba(255,255,255,.2); font-weight: 500; }
+
+/* Light ranking */
+.rank-i-light .rank-pos { color: var(--text-light-secondary); }
+.rank-i-light .rank-name { color: var(--text-light-secondary); }
+.rank-i-light .rank-count { color: var(--text-light-secondary); }
+.rank-i-light .rank-tag { color: rgba(0,0,0,.15); }
+
+/* ══════════════════════════════════════════════════════
+   PARTNER / COACH CARDS
+   ══════════════════════════════════════════════════════ */
+.pgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+.pcard { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.06); border-radius: 16px; padding: 18px; display: flex; align-items: center; gap: 14px; transition: all .25s cubic-bezier(.16,1,.3,1); }
+.pcard:hover { background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.1); transform: translateY(-2px); }
+.pcard-light { background: var(--bg-white); border-color: #e8e8ed; }
+.pcard-light:hover { background: #fff; border-color: #d2d2d7; box-shadow: 0 4px 12px rgba(0,0,0,.06); transform: translateY(-2px); }
+.pav { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px; flex-shrink: 0; }
+.p-name { font-weight: 600; font-size: 15px; letter-spacing: -.01em; }
+.p-meta { font-size: 12px; color: var(--text-dark-secondary); margin-top: 2px; line-height: 1.4; }
+.pcard-light .p-meta { color: var(--text-light-secondary); }
+
+/* ══════════════════════════════════════════════════════
+   EQUIPMENT (Apple product-card style)
+   ══════════════════════════════════════════════════════ */
+.eq { background: var(--bg-white); border-radius: 20px; padding: 32px; margin-bottom: 16px; display: flex; gap: 24px; align-items: flex-start; transition: box-shadow .3s; border: 1px solid #e8e8ed; }
+.eq:hover { box-shadow: 0 8px 24px rgba(0,0,0,.06); }
+.eq-n { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 16px; font-weight: 700; flex-shrink: 0; }
+.eq h4 { font-size: 17px; font-weight: 700; letter-spacing: -.015em; margin-bottom: 4px; }
+.eq-desc { font-size: 14px; color: var(--text-light-secondary); line-height: 1.5; }
+.eq-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.tag { background: var(--bg-light); padding: 4px 12px; border-radius: 980px; font-size: 12px; color: var(--text-light-secondary); font-weight: 500; transition: all .2s; }
+.tag:hover { background: #e8e8ed; color: var(--text-light-primary); }
+
+/* ══════════════════════════════════════════════════════
+   COST (Dark)
+   ══════════════════════════════════════════════════════ */
+.cost-list { display: flex; flex-direction: column; gap: 4px; max-width: 540px; margin: 0 auto; }
+.cost-r { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; background: rgba(255,255,255,.04); border-radius: 12px; transition: background .2s; }
+.cost-r:hover { background: rgba(255,255,255,.07); }
+.cost-l { font-size: 15px; color: var(--text-dark-secondary); }
+.cost-a { font-family: var(--mono); font-weight: 600; font-size: 15px; }
+.cost-t { background: rgba(41,151,255,.08); border: 1px solid rgba(41,151,255,.15); margin-top: 8px; }
+.cost-t .cost-l, .cost-t .cost-a { color: var(--blue); font-weight: 700; }
+
+/* ══════════════════════════════════════════════════════
+   TIMELINE (Light)
+   ══════════════════════════════════════════════════════ */
+.tl { position: relative; padding-left: 28px; max-width: 680px; margin: 40px auto 0; }
+.tl::before { content: ''; position: absolute; left: 6px; top: 8px; bottom: 8px; width: 2px; background: linear-gradient(to bottom, var(--blue), var(--green)); border-radius: 2px; opacity: .2; }
+.tl-i { position: relative; margin-bottom: 28px; padding-left: 20px; }
+.tl-i::before { content: ''; position: absolute; left: -25px; top: 7px; width: 10px; height: 10px; border-radius: 50%; background: var(--bg-light); border: 2.5px solid var(--blue); transition: all .3s cubic-bezier(.16,1,.3,1); z-index: 1; }
+.tl-i:hover::before { background: var(--blue); box-shadow: 0 0 0 4px rgba(41,151,255,.12); }
+.tl-y { font-family: var(--mono); font-size: 12px; color: var(--blue-light); font-weight: 600; letter-spacing: .01em; }
+.tl-t { font-size: 17px; font-weight: 700; margin: 3px 0 4px; letter-spacing: -.015em; color: var(--text-light-primary); }
+.tl-d { font-size: 14px; color: var(--text-light-secondary); line-height: 1.55; }
+
+/* ══════════════════════════════════════════════════════
+   INSIGHTS GRID (Dark — Apple card grid)
+   ══════════════════════════════════════════════════════ */
+.igrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.icard { background: var(--bg-dark-elevated); border-radius: 20px; padding: 28px; transition: transform .3s cubic-bezier(.16,1,.3,1); }
+.icard:hover { transform: scale(1.01); }
+.icard h4 { font-size: 17px; font-weight: 700; letter-spacing: -.01em; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+.icard h4 .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.icard ul { list-style: none; }
+.icard li { padding: 7px 0; font-size: 14px; color: var(--text-dark-secondary); border-bottom: 1px solid rgba(255,255,255,.04); line-height: 1.5; }
+.icard li:last-child { border: none; }
+
+/* ══════════════════════════════════════════════════════
+   FOOTER
+   ══════════════════════════════════════════════════════ */
+footer { background: var(--bg-light); padding: 32px 22px; text-align: center; color: var(--text-light-secondary); font-size: 12px; border-top: 1px solid #d2d2d7; }
+footer p + p { margin-top: 2px; }
+
+/* ══════════════════════════════════════════════════════
+   TWO COLUMNS
+   ══════════════════════════════════════════════════════ */
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 40px; }
+
+/* ══════════════════════════════════════════════════════
+   SCROLL REVEAL
+   ══════════════════════════════════════════════════════ */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
+.reveal.vis { opacity: 1; transform: none; }
+
+/* Stagger children animations */
+.sr { opacity: 0; transform: translateX(-20px); transition: opacity .5s cubic-bezier(.16,1,.3,1), transform .5s cubic-bezier(.16,1,.3,1); }
+.anim-active .sr { opacity: 1; transform: none; }
+.anim-active .sr:nth-child(1) { transition-delay: .05s; }
+.anim-active .sr:nth-child(2) { transition-delay: .1s; }
+.anim-active .sr:nth-child(3) { transition-delay: .15s; }
+.anim-active .sr:nth-child(4) { transition-delay: .2s; }
+.anim-active .sr:nth-child(5) { transition-delay: .25s; }
+.anim-active .sr:nth-child(6) { transition-delay: .3s; }
+.anim-active .sr:nth-child(7) { transition-delay: .35s; }
+.anim-active .sr:nth-child(8) { transition-delay: .4s; }
+.anim-active .sr:nth-child(9) { transition-delay: .45s; }
+
+/* Heatmap cells */
+.hm { opacity: 0; transform: scale(.7); }
+.anim-active .hm { opacity: 1; transform: scale(1); transition: opacity .4s cubic-bezier(.16,1,.3,1), transform .4s cubic-bezier(.16,1,.3,1); }
+.anim-active .hm:nth-child(1) { transition-delay: .05s; }
+.anim-active .hm:nth-child(2) { transition-delay: .08s; }
+.anim-active .hm:nth-child(3) { transition-delay: .11s; }
+.anim-active .hm:nth-child(4) { transition-delay: .14s; }
+.anim-active .hm:nth-child(5) { transition-delay: .17s; }
+.anim-active .hm:nth-child(6) { transition-delay: .2s; }
+.anim-active .hm:nth-child(7) { transition-delay: .23s; }
+.anim-active .hm:nth-child(8) { transition-delay: .26s; }
+.anim-active .hm:nth-child(9) { transition-delay: .29s; }
+.anim-active .hm:nth-child(10) { transition-delay: .32s; }
+.anim-active .hm:nth-child(11) { transition-delay: .35s; }
+.anim-active .hm:nth-child(12) { transition-delay: .38s; }
+
+/* Rank items */
+.rank-i { opacity: 0; transform: translateX(-16px); transition: opacity .4s cubic-bezier(.16,1,.3,1), transform .4s cubic-bezier(.16,1,.3,1); }
+.anim-active .rank-i { opacity: 1; transform: none; }
+.anim-active .rank-i:nth-child(1) { transition-delay: .05s; }
+.anim-active .rank-i:nth-child(2) { transition-delay: .1s; }
+.anim-active .rank-i:nth-child(3) { transition-delay: .15s; }
+.anim-active .rank-i:nth-child(4) { transition-delay: .2s; }
+.anim-active .rank-i:nth-child(5) { transition-delay: .25s; }
+.anim-active .rank-i:nth-child(6) { transition-delay: .3s; }
+.anim-active .rank-i:nth-child(7) { transition-delay: .35s; }
+
+/* Partner/coach cards */
+.pcard { opacity: 0; transform: translateY(16px); transition: all .4s cubic-bezier(.16,1,.3,1); }
+.anim-active .pcard { opacity: 1; transform: none; }
+.anim-active .pcard:nth-child(1) { transition-delay: .05s; }
+.anim-active .pcard:nth-child(2) { transition-delay: .1s; }
+.anim-active .pcard:nth-child(3) { transition-delay: .15s; }
+.anim-active .pcard:nth-child(4) { transition-delay: .2s; }
+
+/* Equipment cards */
+.eq { opacity: 0; transform: translateY(20px); transition: opacity .5s cubic-bezier(.16,1,.3,1), transform .5s cubic-bezier(.16,1,.3,1), box-shadow .3s; }
+.anim-active .eq { opacity: 1; transform: none; }
+.anim-active .eq:nth-of-type(1) { transition-delay: .1s; }
+.anim-active .eq:nth-of-type(2) { transition-delay: .2s; }
+.anim-active .eq:nth-of-type(3) { transition-delay: .3s; }
+
+/* Cost rows */
+.cost-r { opacity: 0; transform: translateY(10px); transition: opacity .35s cubic-bezier(.16,1,.3,1), transform .35s cubic-bezier(.16,1,.3,1), background .2s; }
+.anim-active .cost-r { opacity: 1; transform: none; }
+.anim-active .cost-r:nth-child(1) { transition-delay: .05s; }
+.anim-active .cost-r:nth-child(2) { transition-delay: .1s; }
+.anim-active .cost-r:nth-child(3) { transition-delay: .15s; }
+.anim-active .cost-r:nth-child(4) { transition-delay: .2s; }
+.anim-active .cost-r:nth-child(5) { transition-delay: .3s; }
+
+/* Timeline items */
+.tl-i { opacity: 0; transform: translateX(-16px); transition: opacity .45s cubic-bezier(.16,1,.3,1), transform .45s cubic-bezier(.16,1,.3,1); }
+.anim-active .tl-i { opacity: 1; transform: none; }
+.anim-active .tl-i:nth-child(1) { transition-delay: .04s; }
+.anim-active .tl-i:nth-child(2) { transition-delay: .08s; }
+.anim-active .tl-i:nth-child(3) { transition-delay: .12s; }
+.anim-active .tl-i:nth-child(4) { transition-delay: .16s; }
+.anim-active .tl-i:nth-child(5) { transition-delay: .2s; }
+.anim-active .tl-i:nth-child(6) { transition-delay: .24s; }
+.anim-active .tl-i:nth-child(7) { transition-delay: .28s; }
+.anim-active .tl-i:nth-child(8) { transition-delay: .32s; }
+.anim-active .tl-i:nth-child(9) { transition-delay: .36s; }
+.anim-active .tl-i:nth-child(10) { transition-delay: .4s; }
+.anim-active .tl-i:nth-child(11) { transition-delay: .44s; }
+
+/* Insight cards */
+.icard { opacity: 0; transform: translateY(24px); transition: opacity .5s cubic-bezier(.16,1,.3,1), transform .5s cubic-bezier(.16,1,.3,1); }
+.anim-active .icard { opacity: 1; transform: none; }
+.anim-active .icard:nth-child(1) { transition-delay: .05s; }
+.anim-active .icard:nth-child(2) { transition-delay: .12s; }
+.anim-active .icard:nth-child(3) { transition-delay: .19s; }
+.anim-active .icard:nth-child(4) { transition-delay: .26s; }
+
+.note { font-size: 12px; color: var(--text-dark-secondary); margin-top: 12px; }
+.note-light { font-size: 12px; color: var(--text-light-secondary); margin-top: 12px; }
+
+/* ══════════════════════════════════════════════════════
+   REDUCED MOTION
+   ══════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; } html { scroll-behavior: auto; } .reveal { opacity: 1; transform: none; } }
+
+/* ══════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════ */
+@media (max-width: 1068px) {
+  .section-inner { padding: 64px 22px; min-height: 70vh; }
+  .section-inner.hero-pad { padding: 80px 22px 64px; min-height: 75vh; }
+  .section-inner.auto-h { min-height: auto; }
+}
+@media (max-width: 734px) {
+  .kpi-grid { grid-template-columns: repeat(3, 1fr); }
+  .kpi:nth-child(4), .kpi:nth-child(5) { grid-column: auto; }
+  .cols { grid-template-columns: 1fr; gap: 24px; }
+  .igrid { grid-template-columns: 1fr; }
+  .gn-links { display: none; }
+  .section-inner { padding: 48px 16px; min-height: 60vh; }
+  .section-inner.hero-pad { padding: 56px 16px 48px; min-height: 65vh; }
+  .section-inner.auto-h { min-height: auto; }
+  .bars { height: 170px; }
+  .donut-flex { flex-direction: column; gap: 24px; }
+  .eq { flex-direction: column; gap: 14px; }
+  .rank-name { width: 100px; font-size: 12px; }
+  .pgrid { grid-template-columns: 1fr; }
+  .heatmap { gap: 5px; }
+  .hm { padding: 10px 4px; }
+  .hm-n { font-size: 17px; }
+}
+@media (max-width: 480px) {
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════ NAV ═══════════════════ -->
+<nav class="gn"><div class="gn-inner">
+  <div class="gn-brand"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/></svg>Tennis</div>
+  <div class="gn-links"><span>617 场次</span><span>967.8 小时</span><span>2018–2026</span></div>
+</div></nav>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<div class="hero-gradient section-dark">
+  <div class="section-inner hero-pad">
+    <div class="reveal">
+      <p class="label" style="text-align:center;color:var(--text-dark-secondary);margin-bottom:12px">Nicholas · Tennis Analytics</p>
+      <h1 class="headline-hero hero-title">网球之旅</h1>
+      <p class="subhead subhead-dark" style="margin-top:14px">9 年 · 617 场 · 967.8 小时<br>从深圳城市山谷到广州拓普，从入门到进阶</p>
+    </div>
+    <div class="kpi-grid reveal anim" style="transition-delay:.15s">
+      <div class="kpi"><div class="kpi-n" data-count="617">0</div><div class="kpi-l">总场次</div></div>
+      <div class="kpi"><div class="kpi-n" data-count="967.8">0</div><div class="kpi-l">总时长 (h)</div></div>
+      <div class="kpi"><div class="kpi-n" style="color:var(--green)" data-count="130">0</div><div class="kpi-l">Peak 年 (2025)</div><div class="kpi-delta" style="color:var(--green);background:rgba(48,209,88,.1)">218.3h</div></div>
+      <div class="kpi"><div class="kpi-n" data-count="1.57">0</div><div class="kpi-l">场均时长 (h)</div></div>
+      <div class="kpi"><div class="kpi-n" style="color:var(--blue)" data-count="75">0</div><div class="kpi-l">叶伟力教练</div><div class="kpi-delta" style="color:var(--blue);background:rgba(41,151,255,.1)">2024.05+</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ 年度趋势 (DARK) ═══════════════════ -->
+<div class="section-dark">
+  <div class="section-inner wide">
+    <div class="reveal">
+      <h2 class="headline-section" style="margin-bottom:48px">年度趋势</h2>
+      <div class="chart-title">场次增长</div>
+      <div class="bars anim">
+        <div class="bg"><div class="bv">53</div><div class="b" style="height:40.8%;background:linear-gradient(180deg,#4c9aff,#1a6dd3);animation-delay:.05s"></div><div class="bl">2018</div></div>
+        <div class="bg"><div class="b-growth">+26%</div><div class="bv">67</div><div class="b" style="height:51.5%;background:linear-gradient(180deg,#4c9aff,#1a6dd3);animation-delay:.1s"></div><div class="bl">2019</div></div>
+        <div class="bg"><div class="b-growth neg">-3%</div><div class="bv">65</div><div class="b" style="height:50%;background:linear-gradient(180deg,#4c9aff,#1a6dd3);animation-delay:.15s"></div><div class="bl">2020</div></div>
+        <div class="bg"><div class="b-growth">+18%</div><div class="bv">77</div><div class="b" style="height:59.2%;background:linear-gradient(180deg,#4c9aff,#1a6dd3);animation-delay:.2s"></div><div class="bl">2021</div></div>
+        <div class="bg"><div class="b-growth neg">-42%</div><div class="bv">45</div><div class="b" style="height:34.6%;background:linear-gradient(180deg,#ff453a,#b91c1c);animation-delay:.25s"></div><div class="bl">2022</div></div>
+        <div class="bg"><div class="b-growth">+20%</div><div class="bv">54</div><div class="b" style="height:41.5%;background:linear-gradient(180deg,#4c9aff,#1a6dd3);animation-delay:.3s"></div><div class="bl">2023</div></div>
+        <div class="bg"><div class="b-growth">+96%</div><div class="bv">106</div><div class="b" style="height:81.5%;background:linear-gradient(180deg,#30d158,#059669);animation-delay:.35s"></div><div class="bl">2024</div></div>
+        <div class="bg"><div class="b-growth">+23%</div><div class="bv">130</div><div class="b" style="height:100%;background:linear-gradient(180deg,#30d158,#059669);animation-delay:.4s"></div><div class="bl">2025</div></div>
+        <div class="bg"><div class="bv">20</div><div class="b" style="height:15.4%;background:linear-gradient(180deg,#ff9f0a,#b45309);animation-delay:.45s"></div><div class="bl">2026*</div></div>
+      </div>
+      <p class="note">* 2026 截至 3 月 &nbsp;|&nbsp; 2024-2025 两年占总累计 38.6%</p>
+    </div>
+
+    <div class="reveal" style="margin-top:56px">
+      <div class="chart-title">活动构成</div>
+      <div class="legend">
+        <span><i style="background:var(--blue)"></i>训练课</span>
+        <span><i style="background:var(--purple)"></i>个人训练</span>
+        <span><i style="background:var(--green)"></i>约球</span>
+        <span><i style="background:var(--orange)"></i>比赛</span>
+        <span><i style="background:var(--text-dark-secondary)"></i>其他</span>
+      </div>
+      <div class="sb anim">
+        <div class="sr"><span class="sr-y">2018</span><div class="sr-bar"><div class="sr-seg" style="width:30.2%;background:var(--blue)"></div><div class="sr-seg" style="width:64.2%;background:var(--green)"></div><div class="sr-seg" style="width:1.9%;background:var(--orange)"></div><div class="sr-seg" style="width:3.8%;background:var(--text-dark-secondary)"></div></div><span class="sr-h">99.5h</span></div>
+        <div class="sr"><span class="sr-y">2019</span><div class="sr-bar"><div class="sr-seg" style="width:31.3%;background:var(--blue)"></div><div class="sr-seg" style="width:62.7%;background:var(--green)"></div><div class="sr-seg" style="width:6%;background:var(--text-dark-secondary)"></div></div><span class="sr-h">97.3h</span></div>
+        <div class="sr"><span class="sr-y">2020</span><div class="sr-bar"><div class="sr-seg" style="width:49.2%;background:var(--blue)"></div><div class="sr-seg" style="width:49.2%;background:var(--green)"></div><div class="sr-seg" style="width:1.5%;background:var(--text-dark-secondary)"></div></div><span class="sr-h">105.9h</span></div>
+        <div class="sr"><span class="sr-y">2021</span><div class="sr-bar"><div class="sr-seg" style="width:48.1%;background:var(--blue)"></div><div class="sr-seg" style="width:20.8%;background:var(--green)"></div><div class="sr-seg" style="width:31.2%;background:var(--text-dark-secondary)"></div></div><span class="sr-h">96.4h</span></div>
+        <div class="sr"><span class="sr-y">2022</span><div class="sr-bar"><div class="sr-seg" style="width:31.1%;background:var(--blue)"></div><div class="sr-seg" style="width:33.3%;background:var(--green)"></div><div class="sr-seg" style="width:2.2%;background:var(--orange)"></div><div class="sr-seg" style="width:33.3%;background:var(--text-dark-secondary)"></div></div><span class="sr-h">63.6h</span></div>
+        <div class="sr"><span class="sr-y">2023</span><div class="sr-bar"><div class="sr-seg" style="width:33.3%;background:var(--blue)"></div><div class="sr-seg" style="width:42.6%;background:var(--green)"></div><div class="sr-seg" style="width:1.9%;background:var(--orange)"></div><div class="sr-seg" style="width:22.2%;background:var(--text-dark-secondary)"></div></div><span class="sr-h">89.3h</span></div>
+        <div class="sr"><span class="sr-y">2024</span><div class="sr-bar"><div class="sr-seg" style="width:30.2%;background:var(--blue)"></div><div class="sr-seg" style="width:10.4%;background:var(--purple)"></div><div class="sr-seg" style="width:52.8%;background:var(--green)"></div><div class="sr-seg" style="width:6.6%;background:var(--text-dark-secondary)"></div></div><span class="sr-h">161.5h</span></div>
+        <div class="sr"><span class="sr-y">2025</span><div class="sr-bar"><div class="sr-seg" style="width:30.8%;background:var(--blue)"></div><div class="sr-seg" style="width:20%;background:var(--purple)"></div><div class="sr-seg" style="width:38.5%;background:var(--green)"></div><div class="sr-seg" style="width:0.8%;background:var(--orange)"></div><div class="sr-seg" style="width:10%;background:var(--text-dark-secondary)"></div></div><span class="sr-h">218.3h</span></div>
+        <div class="sr"><span class="sr-y">2026</span><div class="sr-bar"><div class="sr-seg" style="width:35%;background:var(--blue)"></div><div class="sr-seg" style="width:25%;background:var(--purple)"></div><div class="sr-seg" style="width:40%;background:var(--green)"></div></div><span class="sr-h">36.0h</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ 分布 & 热力 (DARK) ═══════════════════ -->
+<div class="section-dark" style="border-top:1px solid rgba(255,255,255,.04)">
+  <div class="section-inner wide">
+    <h2 class="headline-section reveal" style="margin-bottom:48px">数据全景</h2>
+    <div class="cols">
+      <div class="reveal">
+        <div class="chart-title">累计类型分布</div>
+        <div class="donut-flex anim">
+          <div class="donut-box">
+            <svg class="donut-svg" viewBox="0 0 120 120">
+              <circle class="d-track" cx="60" cy="60" r="46"/>
+              <circle class="d-seg" cx="60" cy="60" r="46" stroke="#30d158" stroke-dasharray="129.2 159.8" stroke-dashoffset="0" style="animation-delay:.2s"/>
+              <circle class="d-seg" cx="60" cy="60" r="46" stroke="#2997ff" stroke-dasharray="101.8 187.2" stroke-dashoffset="-129.2" style="animation-delay:.4s"/>
+              <circle class="d-seg" cx="60" cy="60" r="46" stroke="#86868b" stroke-dasharray="36.4 252.6" stroke-dashoffset="-231" style="animation-delay:.6s"/>
+              <circle class="d-seg" cx="60" cy="60" r="46" stroke="#bf5af2" stroke-dasharray="19.7 269.3" stroke-dashoffset="-267.4" style="animation-delay:.8s"/>
+              <circle class="d-seg" cx="60" cy="60" r="46" stroke="#ff9f0a" stroke-dasharray="1.8 287.2" stroke-dashoffset="-287.1" style="animation-delay:1s"/>
+            </svg>
+            <div class="donut-mid"><div class="dn">617</div><div class="dl">总场次</div></div>
+          </div>
+          <div class="d-legend">
+            <div class="d-li"><span class="d-dot" style="background:var(--green)"></span>约球<div class="d-pct">276 (44.7%)</div></div>
+            <div class="d-li"><span class="d-dot" style="background:var(--blue)"></span>训练课<div class="d-pct">217 (35.2%)</div></div>
+            <div class="d-li"><span class="d-dot" style="background:var(--text-dark-secondary)"></span>其他<div class="d-pct">78 (12.6%)</div></div>
+            <div class="d-li"><span class="d-dot" style="background:var(--purple)"></span>个人训练<div class="d-pct">42 (6.8%)</div></div>
+            <div class="d-li"><span class="d-dot" style="background:var(--orange)"></span>比赛<div class="d-pct">4 (0.6%)</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal" style="transition-delay:.1s">
+        <div class="chart-title">2025 月度热力图</div>
+        <div class="heatmap anim">
+          <div class="hm" style="background:rgba(41,151,255,.22)"><div class="hm-n">13</div><div class="hm-m">1月</div></div>
+          <div class="hm" style="background:rgba(41,151,255,.14)"><div class="hm-n">9</div><div class="hm-m">2月</div></div>
+          <div class="hm" style="background:rgba(48,209,88,.3)"><div class="hm-n" style="color:var(--green)">16</div><div class="hm-m">3月</div></div>
+          <div class="hm" style="background:rgba(41,151,255,.18)"><div class="hm-n">11</div><div class="hm-m">4月</div></div>
+          <div class="hm" style="background:rgba(41,151,255,.12)"><div class="hm-n">8</div><div class="hm-m">5月</div></div>
+          <div class="hm" style="background:rgba(255,69,58,.12)"><div class="hm-n" style="color:var(--red)">2</div><div class="hm-m">6月</div></div>
+          <div class="hm" style="background:rgba(41,151,255,.14)"><div class="hm-n">9</div><div class="hm-m">7月</div></div>
+          <div class="hm" style="background:rgba(41,151,255,.24)"><div class="hm-n">14</div><div class="hm-m">8月</div></div>
+          <div class="hm" style="background:rgba(41,151,255,.16)"><div class="hm-n">10</div><div class="hm-m">9月</div></div>
+          <div class="hm" style="background:rgba(41,151,255,.2)"><div class="hm-n">12</div><div class="hm-m">10月</div></div>
+          <div class="hm" style="background:rgba(41,151,255,.16)"><div class="hm-n">10</div><div class="hm-m">11月</div></div>
+          <div class="hm" style="background:rgba(48,209,88,.3)"><div class="hm-n" style="color:var(--green)">16</div><div class="hm-m">12月</div></div>
+        </div>
+        <p class="chart-subtitle">Peak: 3月 & 12月 (16次) &nbsp;|&nbsp; Low: 6月 (2次) &nbsp;|&nbsp; 年均每周 2.5 次</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ 数据表 (LIGHT) ═══════════════════ -->
+<div class="section-light">
+  <div class="section-inner wide">
+    <h2 class="headline-section reveal" style="margin-bottom:48px">年度完整数据</h2>
+    <div class="reveal tbl-wrap">
+      <table>
+        <thead><tr><th>年份</th><th class="r">场次</th><th class="r">时长</th><th class="r">训练课</th><th class="r">个人训练</th><th class="r">约球</th><th class="r">比赛</th><th class="r">其他</th><th class="r">场均</th><th class="r">周均</th></tr></thead>
+        <tbody>
+          <tr><td>2018</td><td class="r">53</td><td class="r">99.5h</td><td class="r">16</td><td class="r">0</td><td class="r">34</td><td class="r">1</td><td class="r">2</td><td class="r">1.88h</td><td class="r">1.0</td></tr>
+          <tr><td>2019</td><td class="r">67</td><td class="r">97.3h</td><td class="r">21</td><td class="r">0</td><td class="r">42</td><td class="r">0</td><td class="r">4</td><td class="r">1.45h</td><td class="r">1.3</td></tr>
+          <tr><td>2020</td><td class="r">65</td><td class="r">105.9h</td><td class="r">32</td><td class="r">0</td><td class="r">32</td><td class="r">0</td><td class="r">1</td><td class="r">1.63h</td><td class="r">1.3</td></tr>
+          <tr><td>2021</td><td class="r">77</td><td class="r">96.4h</td><td class="r">37</td><td class="r">0</td><td class="r">16</td><td class="r">0</td><td class="r">24</td><td class="r">1.25h</td><td class="r">1.5</td></tr>
+          <tr><td>2022</td><td class="r">45</td><td class="r">63.6h</td><td class="r">14</td><td class="r">0</td><td class="r">15</td><td class="r">1</td><td class="r">15</td><td class="r">1.41h</td><td class="r">0.9</td></tr>
+          <tr><td>2023</td><td class="r">54</td><td class="r">89.3h</td><td class="r">18</td><td class="r">0</td><td class="r">23</td><td class="r">1</td><td class="r">12</td><td class="r">1.65h</td><td class="r">1.0</td></tr>
+          <tr class="peak"><td class="hl">2024</td><td class="r hl">106</td><td class="r">161.5h</td><td class="r">32</td><td class="r">11</td><td class="r">56</td><td class="r">0</td><td class="r">7</td><td class="r">1.52h</td><td class="r">2.0</td></tr>
+          <tr class="peak"><td class="hl">2025</td><td class="r hl">130</td><td class="r hl">218.3h</td><td class="r">40</td><td class="r">26</td><td class="r">50</td><td class="r">1</td><td class="r">13</td><td class="r">1.68h</td><td class="r">2.5</td></tr>
+          <tr><td>2026*</td><td class="r">20</td><td class="r">36.0h</td><td class="r">7</td><td class="r">5</td><td class="r">8</td><td class="r">0</td><td class="r">0</td><td class="r">1.80h</td><td class="r">1.5</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ 球伴 & 场地 (DARK) ═══════════════════ -->
+<div class="section-dark">
+  <div class="section-inner wide">
+    <h2 class="headline-section reveal" style="margin-bottom:48px">球伴与场地</h2>
+    <div class="cols">
+      <div class="reveal">
+        <div class="chart-title">球伴频率 Top 7</div>
+        <div class="rank-list anim">
+          <div class="rank-i"><span class="rank-pos">1</span><span class="rank-name">Moo</span><div class="rank-bar" style="width:52%;background:var(--green)"></div><span class="rank-count">~101</span><span class="rank-tag">2022–2026</span></div>
+          <div class="rank-i"><span class="rank-pos">2</span><span class="rank-name">诗雅</span><div class="rank-bar" style="width:14%;background:var(--purple)"></div><span class="rank-count">~28</span><span class="rank-tag">2021–2022</span></div>
+          <div class="rank-i"><span class="rank-pos">3</span><span class="rank-name">全/阿全</span><div class="rank-bar" style="width:6.5%;background:var(--blue)"></div><span class="rank-count">~13</span><span class="rank-tag">2020–2021</span></div>
+          <div class="rank-i"><span class="rank-pos">4</span><span class="rank-name">Kelly</span><div class="rank-bar" style="width:6%;background:var(--cyan)"></div><span class="rank-count">~12</span><span class="rank-tag">2018–2019</span></div>
+          <div class="rank-i"><span class="rank-pos">5</span><span class="rank-name">昌文</span><div class="rank-bar" style="width:4.5%;background:var(--orange)"></div><span class="rank-count">~9</span><span class="rank-tag">2021–2024</span></div>
+          <div class="rank-i"><span class="rank-pos">6</span><span class="rank-name">喻华</span><div class="rank-bar" style="width:4%;background:var(--pink)"></div><span class="rank-count">~8</span><span class="rank-tag">2018–2019</span></div>
+          <div class="rank-i"><span class="rank-pos">7</span><span class="rank-name">李辰辰</span><div class="rank-bar" style="width:3.5%;background:var(--teal)"></div><span class="rank-count">~7</span><span class="rank-tag">2023–2024</span></div>
+        </div>
+      </div>
+      <div class="reveal" style="transition-delay:.1s">
+        <div class="chart-title">场地频率 Top 7</div>
+        <div class="rank-list anim">
+          <div class="rank-i"><span class="rank-pos">1</span><span class="rank-name">拓普系列</span><div class="rank-bar" style="width:50%;background:var(--blue)"></div><span class="rank-count">~120</span><span class="rank-tag">2023–2026</span></div>
+          <div class="rank-i"><span class="rank-pos">2</span><span class="rank-name">海珠体育馆/场</span><div class="rank-bar" style="width:30%;background:var(--green)"></div><span class="rank-count">~70</span><span class="rank-tag">2020–2025</span></div>
+          <div class="rank-i"><span class="rank-pos">3</span><span class="rank-name">喜来登网球场</span><div class="rank-bar" style="width:22%;background:var(--orange)"></div><span class="rank-count">~50</span><span class="rank-tag">2019–2022</span></div>
+          <div class="rank-i"><span class="rank-pos">4</span><span class="rank-name">酷动网球中心</span><div class="rank-bar" style="width:16%;background:var(--purple)"></div><span class="rank-count">~35</span><span class="rank-tag">2024–2026</span></div>
+          <div class="rank-i"><span class="rank-pos">5</span><span class="rank-name">香格里拉</span><div class="rank-bar" style="width:15%;background:var(--cyan)"></div><span class="rank-count">~33</span><span class="rank-tag">2020–2023</span></div>
+          <div class="rank-i"><span class="rank-pos">6</span><span class="rank-name">城市山谷</span><div class="rank-bar" style="width:14%;background:var(--pink)"></div><span class="rank-count">~30</span><span class="rank-tag">2018–2019</span></div>
+          <div class="rank-i"><span class="rank-pos">7</span><span class="rank-name">南山网球中心</span><div class="rank-bar" style="width:7%;background:var(--text-dark-secondary)"></div><span class="rank-count">~16</span><span class="rank-tag">2018</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top:56px">
+      <div class="chart-title">教练谱系</div>
+      <div class="pgrid anim">
+        <div class="pcard"><div class="pav" style="background:rgba(41,151,255,.15);color:var(--blue)">叶</div><div><div class="p-name">叶伟力</div><div class="p-meta">主教练 · 2024.05–present · ~75 课时</div></div></div>
+        <div class="pcard"><div class="pav" style="background:rgba(255,159,10,.12);color:var(--orange)">陈</div><div><div class="p-name">陈滔</div><div class="p-meta">2023.09–2024.01 · ~17 课时 · 华工西区</div></div></div>
+        <div class="pcard"><div class="pav" style="background:rgba(48,209,88,.12);color:var(--green)">喜</div><div><div class="p-name">喜来登/香格里拉教练</div><div class="p-meta">2019–2022 · 正拍→费德勒动作→发球</div></div></div>
+        <div class="pcard"><div class="pav" style="background:rgba(191,90,242,.12);color:var(--purple)">南</div><div><div class="p-name">南山网球中心教练</div><div class="p-meta">2018 · 启蒙 · ~16 课时</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ 装备 & 成长 (LIGHT) ═══════════════════ -->
+<div class="section-light">
+  <div class="section-inner">
+    <h2 class="headline-section reveal" style="margin-bottom:48px">装备记录</h2>
+    <div class="reveal anim">
+      <div class="eq"><div class="eq-n" style="background:rgba(191,90,242,.1);color:var(--purple)">01</div><div><h4>Wilson Federer Pro 105</h4><p class="eq-desc">入门拍 · 费德勒签名系列 · 拍面 105 sq in</p><div class="eq-tags"><span class="tag">2016-11 购入</span><span class="tag">入门启蒙</span><span class="tag">双11购买</span></div></div></div>
+      <div class="eq"><div class="eq-n" style="background:rgba(41,151,255,.1);color:var(--blue)">02</div><div><h4>Wilson ProStaff 6.0 95</h4><p class="eq-desc">桑普拉斯同款 · Graphite/Kevlar 80/20 · PWS · 双拍</p><div class="eq-tags"><span class="tag">2025-12 启用</span><span class="tag">95 sq in</span><span class="tag">L2 握把</span><span class="tag">德国旗配色</span></div></div></div>
+      <div class="eq"><div class="eq-n" style="background:rgba(48,209,88,.1);color:var(--green)">03</div><div><h4>Wilson Pro Staff 97 V14 Heritage</h4><p class="eq-desc">最新主力 · Heritage 复古木纹 · 315g 碳素 · WR156810</p><div class="eq-tags"><span class="tag">2026-03 购入</span><span class="tag">97 sq in</span><span class="tag">2号柄</span></div></div></div>
+    </div>
+    <p class="note-light reveal">105 → 95 → 97 sq in &nbsp;|&nbsp; 费德勒系列 → 桑普拉斯经典 → V14 Heritage &nbsp;|&nbsp; Wilson Pro Staff 全系忠实用户</p>
+  </div>
+</div>
+
+<!-- ═══════════════════ 成长历程 (LIGHT) ═══════════════════ -->
+<div class="section-white">
+  <div class="section-inner narrow auto-h">
+    <h2 class="headline-section reveal" style="margin-bottom:16px">成长历程</h2>
+    <p class="subhead subhead-light reveal" style="margin-bottom:8px">从 2016 双11 的第一支球拍，到 9 年后的 617 场记录</p>
+    <div class="reveal">
+      <div class="tl anim">
+        <div class="tl-i"><div class="tl-y">2016.11</div><div class="tl-t">入门</div><div class="tl-d">双11 购入 Wilson Federer Pro 105</div></div>
+        <div class="tl-i"><div class="tl-y">2018</div><div class="tl-t">深圳 · 系统训练</div><div class="tl-d">南山网球中心 53 场 / 99.5h，城市山谷约球 34 次</div></div>
+        <div class="tl-i"><div class="tl-y">2019</div><div class="tl-t">约球高峰 → 广州</div><div class="tl-d">42 次约球 (Kelly、chockli)，年中转至广州喜来登训练</div></div>
+        <div class="tl-i"><div class="tl-y">2020</div><div class="tl-t">正拍开放式脚步</div><div class="tl-d">喜来登 32 次训练课，训练与约球完美 32:32 各半</div></div>
+        <div class="tl-i"><div class="tl-y">2021</div><div class="tl-t">费德勒动作 & 发球</div><div class="tl-d">37 次训练课 (年度占比最高)，技术定型期</div></div>
+        <div class="tl-i"><div class="tl-y">2022</div><div class="tl-t">低谷调整</div><div class="tl-d">45 场 / 63.6h (历史最低)，首次正式比赛</div></div>
+        <div class="tl-i"><div class="tl-y">2023</div><div class="tl-t">拜师陈滔 · 遇见 Moo</div><div class="tl-d">华工西区 17 课时，建立固定约球关系</div></div>
+        <div class="tl-i"><div class="tl-y">2024.05</div><div class="tl-t">拜师叶伟力 · 爆发</div><div class="tl-d">106 场 / 161.5h (+96.3%)，温布尔登朝圣</div></div>
+        <div class="tl-i"><div class="tl-y">2025</div><div class="tl-t">历史巅峰</div><div class="tl-d">130 场 / 218.3h，周均 2.5 次，6 次赛事</div></div>
+        <div class="tl-i"><div class="tl-y">2025.12</div><div class="tl-t">装备升级</div><div class="tl-d">ProStaff 6.0 95 (桑普拉斯同款)，完成入门→专业进阶</div></div>
+        <div class="tl-i"><div class="tl-y">2026.03</div><div class="tl-t">持续进阶</div><div class="tl-d">V14 Heritage 入手，3 个月 20 场 / 36h</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ 费用 (DARK) ═══════════════════ -->
+<div class="section-dark">
+  <div class="section-inner narrow">
+    <h2 class="headline-section reveal" style="margin-bottom:8px">2025 费用</h2>
+    <p class="subhead subhead-dark reveal" style="margin-bottom:40px">全年网球投入估算</p>
+    <div class="reveal">
+      <div class="cost-list anim">
+        <div class="cost-r"><span class="cost-l">训练课 (40 次 x 700)</span><span class="cost-a">28,000 元</span></div>
+        <div class="cost-r"><span class="cost-l">约球场地 (50 次 x ~100)</span><span class="cost-a">5,000 元</span></div>
+        <div class="cost-r"><span class="cost-l">个人训练 (26 次 x ~80)</span><span class="cost-a">2,080 元</span></div>
+        <div class="cost-r"><span class="cost-l">比赛 + 其他 (14 次 x ~150)</span><span class="cost-a">2,100 元</span></div>
+        <div class="cost-r cost-t"><span class="cost-l">全年总计</span><span class="cost-a">~37,180 元</span></div>
+      </div>
+      <p class="note" style="text-align:center;margin-top:16px">月均 ~3,098 元 &nbsp;|&nbsp; 训练课占 75.3%</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ 洞察 (DARK) ═══════════════════ -->
+<div class="section-dark" style="border-top:1px solid rgba(255,255,255,.04)">
+  <div class="section-inner wide">
+    <h2 class="headline-section reveal" style="margin-bottom:48px">关键洞察</h2>
+    <div class="igrid anim">
+      <div class="icard reveal"><h4><span class="dot" style="background:var(--blue)"></span>训练模式演变</h4><ul>
+        <li>2018–2021: 训练课为主，技术基础期 (16→37 次/年)</li>
+        <li>2020–2021: 正拍开放式脚步 → 费德勒动作/发球</li>
+        <li>2022–2023: 低谷过渡，寻找新教练方向</li>
+        <li>2024+: 训练课 + 个人训练 + 约球三维并进</li>
+        <li>个人训练 0→26 次/年，自主练习意识爆发</li>
+      </ul></div>
+      <div class="icard reveal" style="transition-delay:.1s"><h4><span class="dot" style="background:var(--green)"></span>增长数据</h4><ul>
+        <li>2024 场次同比 +96.3% (54→106)，拐点之年</li>
+        <li>2025 时长同比 +35.2% (161.5h→218.3h)</li>
+        <li>2024–2025 占总累计 38.6% (236/617)</li>
+        <li>周均: 0.9→1.0→2.0→2.5 (2022→2025)</li>
+        <li>近两年密度 = 此前 6 年总和的 63%</li>
+      </ul></div>
+      <div class="icard reveal" style="transition-delay:.15s"><h4><span class="dot" style="background:var(--purple)"></span>训练偏好</h4><ul>
+        <li>主时段: 19:00–21:00 (教练课 + 个训)</li>
+        <li>周末: 10–12 点 / 14–16 点 约球</li>
+        <li>夜场: 酷动网球中心 20:00–22:00</li>
+        <li>城市: 深圳 (2018–2019) → 广州 (2020+)</li>
+        <li>固定节奏: 周五教练课 + 周末 Moo 约球</li>
+      </ul></div>
+      <div class="icard reveal" style="transition-delay:.2s"><h4><span class="dot" style="background:var(--orange)"></span>关键人物</h4><ul>
+        <li>叶伟力: 训练量翻倍的核心驱动力 (2024.05+)</li>
+        <li>Moo: 101 次约球，最持久球伴 (4年+)</li>
+        <li>陈滔: 2023 过渡期关键衔接教练</li>
+        <li>喜来登教练: 费德勒技术体系奠基人</li>
+        <li>每次换教练都带来训练模式质变</li>
+      </ul></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<footer>
+  <p>Data: Obsidian Personal-Vault/Tennis &nbsp;|&nbsp; Generated 2026-04-07</p>
+  <p>617 sessions &middot; 967.8 hours &middot; 9 years</p>
+</footer>
+
+<!-- ═══════════════════ SCRIPTS ═══════════════════ -->
+<script>
+// Counter animation
+function animateCounters(){
+  document.querySelectorAll('[data-count]').forEach(el=>{
+    const target=parseFloat(el.dataset.count);
+    const isFloat=target%1!==0;
+    const dur=1400;
+    const t0=performance.now();
+    (function tick(now){
+      const p=Math.min((now-t0)/dur,1);
+      const e=1-Math.pow(1-p,4);
+      el.textContent=isFloat?(target*e).toFixed(1):Math.round(target*e).toLocaleString();
+      if(p<1)requestAnimationFrame(tick);
+    })(t0);
+  });
+}
+
+// Scroll reveal for .reveal elements
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target)}})},{threshold:.06,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// Scroll-triggered animations for .anim containers
+const ao=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('anim-active');ao.unobserve(e.target)}})},{threshold:.15,rootMargin:'0px 0px -60px 0px'});
+document.querySelectorAll('.anim').forEach(el=>ao.observe(el));
+
+// Counter animation triggered on scroll
+const ho=new IntersectionObserver(es=>{if(es[0].isIntersecting){animateCounters();ho.disconnect()}},{threshold:.25});
+ho.observe(document.querySelector('.kpi-grid'));
+</script>
+</body>
+</html>
